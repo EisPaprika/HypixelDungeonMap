@@ -7,7 +7,7 @@ import net.minecraft.command.ICommandSender;
 public class ToggleMapCommand extends CommandBase {
 	@Override
 	public String getCommandName() {
-		return "hdm";
+		return "toggleMap";
 	}
 
 	@Override
@@ -22,6 +22,12 @@ public class ToggleMapCommand extends CommandBase {
 
 	@Override
 	public void processCommand(ICommandSender arg0, String[] arg1) throws CommandException {
+		/*if (HypixelDungeonMap.showMap == false) {
+			HypixelDungeonMap.showMap = true;
+		}
+		else {
+			HypixelDungeonMap.showMap = false;
+		}*/
 		DungeonMap.renderOverlay();
 	}
 }

@@ -25,22 +25,32 @@ public class DungeonMap {
 		oldMapData = null;
 	}
 
+	static boolean showMap = true;
+
 	public static void renderOverlay() {
+		if (HypixelDungeonMap.showMap == false)
+			return;
 		double x = 0;
 		double y = 0;
 		float scale = 1;
+		int i = 1;
 		try {
-			List<ItemStack> items = Minecraft.getMinecraft().thePlayer.inventoryContainer.inventoryItemStacks;
-			for (ItemStack item : items) {
-				if (item != null) {
-					if (item.getItem().isMap()) {
-						if (item.getItem() instanceof ItemMap) {
-							ItemMap mapitem = (ItemMap) item.getItem();
-							mapData = mapitem.getMapData(item, Minecraft.getMinecraft().thePlayer.getEntityWorld());
-						}
+			ItemStack[] items = Minecraft.getMinecraft().thePlayer.getInventory();
+			/*for (ItemStack item : items) {
+				Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("I am here!"));
+				if (item.getItem().isMap()) {
+					Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("I am here too!"));
+					if (item.getItem() instanceof ItemMap) {
+						ItemMap mapitem = (ItemMap) item.getItem();
+						mapData = mapitem.getMapData(item, Minecraft.getMinecraft().thePlayer.getEntityWorld());
 					}
 				}
-			}
+			}*/
+			Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("" + items.length));
+			ItemStack item = items[8];
+			ItemMap mapitem = (ItemMap) item.getItem();
+			mapData = mapitem.getMapData(item, Minecraft.getMinecraft().thePlayer.getEntityWorld());
+
 			if (mapData == null)
 				return;
 			oldMapData = mapData;
@@ -104,10 +114,10 @@ public class DungeonMap {
 	};
 
 	public static void drawMapBackground() {
-		Minecraft.getMinecraft().getTextureManager().bindTexture(RES_MAP_BACKGROUND); // Minecraft.getTextureManager().bindTexture()
+		Minecraft.getMinecraft().getTextureManager().bindTexture(RES_MAP_BACKGROUND);
 		Tessellator tessellator = Tessellator.getInstance();
 		WorldRenderer worldrenderer = tessellator.getWorldRenderer();
-		GlStateManager.pushMatrix(); // push
+		GlStateManager.pushMatrix();
 		GlStateManager.enableAlpha();
 		GL11.glNormal3f(0.0F, 0.0F, -1.0F);
 		GlStateManager.translate(0F, 0F, -1.0F);
@@ -117,6 +127,6 @@ public class DungeonMap {
 		worldrenderer.pos(135.0, -7.0, 0.0).tex(1.0, 0.0).endVertex();
 		worldrenderer.pos(-7.0, -7.0, 0.0).tex(0.0, 0.0).endVertex();
 		tessellator.draw();
-		GlStateManager.popMatrix(); // pop
+		GlStateManager.popMatrix();
 	}
 }
