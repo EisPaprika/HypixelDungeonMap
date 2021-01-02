@@ -15,7 +15,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 public class HypixelDungeonMap {
 
 
-	public static final String MODID = "HypixelDungeonMap";
+	public static final String MODID = "hdm";
 	public static final String VERSION = "1.0";
 	public static final String NAME = "HypixelDungeonMap";
 	public static boolean showMap = true;
