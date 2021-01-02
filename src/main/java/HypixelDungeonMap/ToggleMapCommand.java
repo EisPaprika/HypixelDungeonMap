@@ -30,6 +30,5 @@ public class ToggleMapCommand extends CommandBase {
 		}else{
 			Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("The map is now hidden."));
 		}
-		DungeonMap.renderOverlay();
 	}
 }
