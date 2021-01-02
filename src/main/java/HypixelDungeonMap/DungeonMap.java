@@ -1,7 +1,5 @@
 package HypixelDungeonMap;
 
-import java.util.List;
-
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.Minecraft;
@@ -15,62 +13,61 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Vec4b;
 import net.minecraft.world.storage.MapData;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class DungeonMap {
 	static ResourceLocation RES_MAP_BACKGROUND = new ResourceLocation("textures/map/map_background.png");
 	static MapData oldMapData;
 	static MapData mapData;
+	@SubscribeEvent
+	public void onRenderGui(RenderGameOverlayEvent.Post event){
+		if(event.type != RenderGameOverlayEvent.ElementType.EXPERIENCE) return;
+		renderOverlay();
+	}
 
 	public static void worldLoad() {
 		oldMapData = null;
 	}
 
-	static boolean showMap = true;
-
 	public static void renderOverlay() {
 		if (HypixelDungeonMap.showMap == false)
 			return;
-		double x = 0;
-		double y = 0;
+		double x = 10;
+		double y = 10;
 		float scale = 1;
-		int i = 1;
 		try {
-			ItemStack[] items = Minecraft.getMinecraft().thePlayer.getInventory();
-			/*for (ItemStack item : items) {
-				Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("I am here!"));
-				if (item.getItem().isMap()) {
-					Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("I am here too!"));
-					if (item.getItem() instanceof ItemMap) {
-						ItemMap mapitem = (ItemMap) item.getItem();
-						mapData = mapitem.getMapData(item, Minecraft.getMinecraft().thePlayer.getEntityWorld());
+			ItemStack[] items = Minecraft.getMinecraft().thePlayer.inventory.mainInventory;
+			for (ItemStack item : items) {
+				if (item != null) {
+					if (item.getItem().isMap()) {
+						if (item.getItem() instanceof ItemMap) {
+							ItemMap mapitem = (ItemMap) item.getItem();
+							mapData = mapitem.getMapData(item, Minecraft.getMinecraft().thePlayer.getEntityWorld());
+						}
 					}
 				}
-			}*/
-			Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("" + items.length));
-			ItemStack item = items[8];
-			ItemMap mapitem = (ItemMap) item.getItem();
-			mapData = mapitem.getMapData(item, Minecraft.getMinecraft().thePlayer.getEntityWorld());
-
+			}
 			if (mapData == null)
 				return;
 			oldMapData = mapData;
 		} catch (Error error) {
 			Minecraft.getMinecraft().thePlayer
-					.addChatMessage(new ChatComponentText("&cError loading map! Check your console!"));
+					.addChatMessage(new ChatComponentText("Error loading map! Check your console!"));
 			return;
 		}
 
 		try {
-			GlStateManager.pushMatrix(); // GlStateManager.push()
-			GlStateManager.translate(x, y, 0.0); // GlStateManager.translate()
-			GlStateManager.scale(scale, scale, 1); // GlStateManager.scale()
-			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F); // GlStateManager.color()
+			GlStateManager.pushMatrix();
+			GlStateManager.translate(x, y, 0.0);
+			GlStateManager.scale(scale, scale, 1);
+			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 			drawMapBackground();
 			Minecraft.getMinecraft().entityRenderer.getMapItemRenderer().renderMap(mapData, true);
 			drawPlayersOnMap();
-			GlStateManager.popMatrix(); // GlStateManager.pop()
+			GlStateManager.popMatrix();
 		} catch (Error error) {
-			Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("&cError! Check your console!"));
+			Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("Error! Check your console!"));
 		}
 	}
 
@@ -102,7 +99,7 @@ public class DungeonMap {
 			worldrenderer.pos(1.0D, -1.0D, (double) ((float) k * -0.001F)).tex((double) f3, (double) f4).endVertex();
 			worldrenderer.pos(-1.0D, -1.0D, (double) ((float) k * -0.001F)).tex((double) f1, (double) f4).endVertex();
 			tessellator.draw();
-			GlStateManager.popMatrix(); // pop
+			GlStateManager.popMatrix();
 			k++;
 			z++;
 		}

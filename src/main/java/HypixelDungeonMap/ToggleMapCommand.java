@@ -1,8 +1,10 @@
 package HypixelDungeonMap;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.util.ChatComponentText;
 
 public class ToggleMapCommand extends CommandBase {
 	@Override
@@ -22,12 +24,12 @@ public class ToggleMapCommand extends CommandBase {
 
 	@Override
 	public void processCommand(ICommandSender arg0, String[] arg1) throws CommandException {
-		/*if (HypixelDungeonMap.showMap == false) {
-			HypixelDungeonMap.showMap = true;
+		HypixelDungeonMap.showMap = !HypixelDungeonMap.showMap;
+		if(HypixelDungeonMap.showMap){
+			Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("The map is now shown."));
+		}else{
+			Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("The map is now hidden."));
 		}
-		else {
-			HypixelDungeonMap.showMap = false;
-		}*/
 		DungeonMap.renderOverlay();
 	}
 }

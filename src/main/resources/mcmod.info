@@ -2,13 +2,13 @@
 {
   "modid": "hdm",
   "name": "Hypixel Dungeon Map",
-  "description": "Shows the Dungeon Map while its not hold.",
+  "description": "Shows the dungeon map while its not hold.",
   "version": 1.0.0,
   "mcversion": 1.8.9,
   "url": "https://github.com/EisPaprika/HypixelDungeonMap",
   "updateUrl": "",
   "authorList": ["EisPaprika"],
-  "credits": "Idea was taken from DungeonUtilities",
+  "credits": "Asmcx15",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []

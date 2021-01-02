@@ -10,8 +10,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 @Mod(modid = HypixelDungeonMap.MODID, version = HypixelDungeonMap.VERSION, name = HypixelDungeonMap.NAME, clientSideOnly = true)
 
-// This modification is based on the map feature of DungeonUtilities which is not around in any free Java
-// based modification yet
+// This modification is based on the map feature of DungeonUtilities
 
 public class HypixelDungeonMap {
 
@@ -23,6 +22,7 @@ public class HypixelDungeonMap {
 	@EventHandler
 	public static void preInit(final FMLPreInitializationEvent event) {
 		ClientCommandHandler.instance.registerCommand(new ToggleMapCommand());
+		MinecraftForge.EVENT_BUS.register(new DungeonMap());
 	}
 
 	@EventHandler
@@ -31,6 +31,5 @@ public class HypixelDungeonMap {
 
 	@EventHandler
 	public static void postInit(FMLPostInitializationEvent event) {
-		MinecraftForge.EVENT_BUS.register(new MapRenderer());
 	}
 }
