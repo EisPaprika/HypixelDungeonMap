@@ -31,7 +31,12 @@ public class DungeonMap {
 	public static void worldLoad() {
 		oldMapData = null;
 	}
-
+	
+	@SubscribeEvent
+    public void onWorldChange(WorldEvent.Load event) {
+		DungeonMap.clear();
+    }
+	
 	public static void renderOverlay() {
 		if (HypixelDungeonMap.showMap == false)
 			return;
