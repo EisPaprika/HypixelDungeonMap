@@ -15,6 +15,7 @@ import net.minecraft.util.Vec4b;
 import net.minecraft.world.storage.MapData;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.event.world.WorldEvent;
 
 // This class is based on the map feature from the ChatTriggers mod DungeonUtilities
 
@@ -34,7 +35,8 @@ public class DungeonMap {
 	
 	@SubscribeEvent
     public void onWorldChange(WorldEvent.Load event) {
-		DungeonMap.clear();
+		mapData = null;
+		oldMapData = null;
     }
 	
 	public static void renderOverlay() {
