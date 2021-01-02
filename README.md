@@ -2,6 +2,8 @@
 
 An alternative for those who just want the map feature.
 
+You need jdk8 to compile these files. Make sure JAVA_HOME is set to the jdk8 directory.
+
 Installation
 1. Download the files
 2. Unpack them
