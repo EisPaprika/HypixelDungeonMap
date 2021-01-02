@@ -16,7 +16,7 @@ public class HypixelDungeonMap {
 
 
 	public static final String MODID = "hdm";
-	public static final String VERSION = "1.0.0";
+	public static final String VERSION = "1.0";
 	public static final String NAME = "Hypixel Dungeon Map";
 	public static boolean showMap = true;
 	@EventHandler
