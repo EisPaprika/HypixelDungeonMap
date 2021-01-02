@@ -16,6 +16,8 @@ import net.minecraft.world.storage.MapData;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+// This class is based on the map feature from the ChatTriggers mod DungeonUtilities
+
 public class DungeonMap {
 	static ResourceLocation RES_MAP_BACKGROUND = new ResourceLocation("textures/map/map_background.png");
 	static MapData oldMapData;
